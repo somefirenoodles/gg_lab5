@@ -1,54 +1,91 @@
+<?php
+$salidaFor = [];
+for ($numero = 1; $numero <= 20; $numero++) {
+    $salidaFor[] = [
+        'numero' => $numero,
+        'tipo' => ($numero % 2 === 0) ? 'Par' : 'Impar'
+    ];
+}
+
+$actual = 1;
+$sumaHastaCien = 0;
+while ($actual <= 100) {
+    $sumaHastaCien += $actual;
+    $actual++;
+}
+
+$cuentaRegresiva = [];
+$segundos = 10;
+do {
+    $cuentaRegresiva[] = $segundos;
+    $segundos--;
+} while ($segundos >= 1);
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ejercicio 2 - Estructuras repetitivas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estructuras repetitivas</title>
     <style>
-        body { font-family: Arial, sans-serif; background: #f4f6f8; margin: 30px; }
-        .caja { background: #fff; max-width: 500px; margin: 0 auto 20px; padding: 20px; border-radius: 8px; box-shadow: 0 1px 4px #0003; }
-        h1 { text-align: center; color: #1f3a5f; }
-        h2 { font-size: 18px; color: #1f3a5f; }
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: "Segoe UI", sans-serif; background: #101d18; color: #1c3027; }
+        .contenedor { width: min(1080px, 92%); margin: 42px auto; }
+        .titulo { color: #fff; margin-bottom: 24px; }
+        .titulo h1 { margin: 0; font-size: 32px; }
+        .titulo p { color: #a7c4b4; }
+        .rejilla { display: grid; grid-template-columns: 1.35fr .8fr .8fr; gap: 18px; align-items: stretch; }
+        .panel { background: #f6f8f6; border-radius: 16px; padding: 24px; }
+        .panel h2 { margin-top: 0; color: #174d37; font-size: 19px; }
+        .numeros { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+        .numero { background: #fff; border: 1px solid #dbe6df; border-radius: 10px; padding: 9px; text-align: center; }
+        .numero b { display: block; font-size: 18px; color: #174d37; }
+        .numero span { font-size: 12px; color: #718078; }
+        .resultado { display: flex; min-height: 190px; align-items: center; justify-content: center; text-align: center; flex-direction: column; }
+        .resultado strong { font-size: 38px; color: #174d37; }
+        .resultado small { color: #6d7a73; margin-top: 8px; }
+        .regresiva { display: flex; flex-wrap: wrap; gap: 7px; justify-content: center; margin-top: 22px; }
+        .regresiva span { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 50%; background: #dcece3; font-weight: 700; color: #174d37; }
+        .despegue { margin-top: 18px; background: #174d37; color: #fff; padding: 11px 14px; border-radius: 10px; text-align: center; font-weight: 700; }
+        @media (max-width: 850px) { .rejilla { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-<h1>Comparación de estructuras repetitivas</h1>
+<main class="contenedor">
+    <header class="titulo">
+        <h1>Laboratorio de ciclos</h1>
+        <p>Tres problemas, tres estructuras repetitivas diferentes.</p>
+    </header>
 
-<div class="caja">
-    <h2>a) Ciclo for: números del 1 al 20</h2>
-    <?php
-    for ($i = 1; $i <= 20; $i++) {
-        if ($i % 2 == 0) {
-            echo "$i es par<br>";
-        } else {
-            echo "$i es impar<br>";
-        }
-    }
-    ?>
-</div>
+    <section class="rejilla">
+        <article class="panel">
+            <h2>for · números del 1 al 20</h2>
+            <div class="numeros">
+                <?php foreach ($salidaFor as $dato): ?>
+                    <div class="numero">
+                        <b><?= $dato['numero'] ?></b>
+                        <span><?= $dato['tipo'] ?></span>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </article>
 
-<div class="caja">
-    <h2>b) Ciclo while: suma de 1 a 100</h2>
-    <?php
-    $n = 1;
-    $suma = 0;
-    while ($n <= 100) {
-        $suma += $n;
-        $n++;
-    }
-    echo "La suma de los enteros del 1 al 100 es: <strong>$suma</strong>";
-    ?>
-</div>
+        <article class="panel resultado">
+            <h2>while · suma del 1 al 100</h2>
+            <strong><?= $sumaHastaCien ?></strong>
+            <small>resultado acumulado</small>
+        </article>
 
-<div class="caja">
-    <h2>c) Ciclo do...while: cuenta regresiva</h2>
-    <?php
-    $contador = 10;
-    do {
-        echo "$contador<br>";
-        $contador--;
-    } while ($contador >= 1);
-    echo "<strong>¡Despegue!</strong>";
-    ?>
-</div>
+        <article class="panel">
+            <h2>do...while · cuenta regresiva</h2>
+            <div class="regresiva">
+                <?php foreach ($cuentaRegresiva as $valor): ?>
+                    <span><?= $valor ?></span>
+                <?php endforeach; ?>
+            </div>
+            <div class="despegue">¡Despegue!</div>
+        </article>
+    </section>
+</main>
 </body>
 </html>
