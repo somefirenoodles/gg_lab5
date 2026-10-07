@@ -1,26 +1,43 @@
 <?php
-require "config/configuracion.php";
-require "includes/encabezado.php";
+require 'config/configuracion.php';
+require 'includes/encabezado.php';
 
-$productos = [
-    ["nombre" => "Monitor",  "precio" => 185.00],
-    ["nombre" => "Teclado",  "precio" => 25.00],
-    ["nombre" => "Mouse",    "precio" => 15.50],
+$catalogo = [
+    ['nombre' => 'Dock USB-C 8 en 1', 'precio' => 54.90],
+    ['nombre' => 'Mouse ergonómico', 'precio' => 24.50],
+    ['nombre' => 'Teclado compacto', 'precio' => 39.95],
+    ['nombre' => 'Soporte ajustable', 'precio' => 27.75]
 ];
 ?>
 <main>
-    <h2>Nuestros productos</h2>
-    <table>
-        <tr><th>Producto</th><th>Precio</th><th>ITBMS</th><th>Total</th></tr>
-        <?php foreach ($productos as $p): ?>
-            <?php $impuesto = $p["precio"] * ITBMS; ?>
-            <tr>
-                <td><?= $p["nombre"] ?></td>
-                <td>$<?= number_format($p["precio"], 2) ?></td>
-                <td>$<?= number_format($impuesto, 2) ?></td>
-                <td>$<?= number_format($p["precio"] + $impuesto, 2) ?></td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
+    <section class="tarjeta">
+        <h2>Catálogo disponible</h2>
+        <p>El impuesto se calcula a partir de la constante <strong>ITBMS</strong> definida en la configuración general.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Precio base</th>
+                    <th>ITBMS</th>
+                    <th>Precio final</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($catalogo as $articulo): ?>
+                <?php
+                $montoImpuesto = $articulo['precio'] * ITBMS;
+                $precioFinal = $articulo['precio'] + $montoImpuesto;
+                ?>
+                <tr>
+                    <td><?= htmlspecialchars($articulo['nombre']) ?></td>
+                    <td>$<?= number_format($articulo['precio'], 2) ?></td>
+                    <td>$<?= number_format($montoImpuesto, 2) ?></td>
+                    <td><strong>$<?= number_format($precioFinal, 2) ?></strong></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </section>
 </main>
-<?php include "includes/pie.php"; ?>
+<?php include 'includes/pie.php'; ?>
