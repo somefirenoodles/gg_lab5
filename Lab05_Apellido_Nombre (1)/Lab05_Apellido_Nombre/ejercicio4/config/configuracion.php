@@ -1,4 +1,4 @@
 <?php
-// Constantes globales del sitio
-define("NOMBRE_EMPRESA", "TecnoPanamá S.A.");
-define("ITBMS", 0.07); // 7 %
+define('NOMBRE_EMPRESA', 'Nexo Digital Panamá');
+define('ITBMS', 0.07);
+define('LEMA_EMPRESA', 'Tecnología práctica para el día a día');
