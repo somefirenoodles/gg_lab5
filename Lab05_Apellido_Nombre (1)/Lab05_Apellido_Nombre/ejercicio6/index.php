@@ -141,7 +141,6 @@ foreach ($casos as $caso) {
                         <div class="fila"><span>Precio unitario</span><strong>$<?= number_format($datos['precio'], 2) ?></strong></div>
                         <div class="fila"><span>Cantidad</span><strong><?= $datos['cantidad'] ?></strong></div>
                         <div class="fila"><span>Subtotal</span><strong>$<?= number_format($datos['subtotal'], 2) ?></strong></div>
-                        <div class="fila"><span>ITBMS (<?= self::IMPUESTO ?? '' ?>)</span></div>
                         <div class="fila"><span>Impuesto (<?= Pedido::IMPUESTO * 100 ?>%)</span><strong>$<?= number_format($datos['impuesto'], 2) ?></strong></div>
                         <div class="total"><span>Total</span><strong>$<?= number_format($datos['total'], 2) ?></strong></div>
                     <?php else: ?>
