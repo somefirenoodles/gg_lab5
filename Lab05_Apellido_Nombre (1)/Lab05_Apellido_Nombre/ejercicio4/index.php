@@ -1,26 +1,25 @@
 <?php
 /*
- * EXPLICACIÓN: include vs require
- *
- * Prueba realizada: se cambió temporalmente el nombre de un archivo incluido
- * (por ejemplo includes/pie.php -> includes/pie_x.php) y se recargó la página.
- *
- * - include: si no encuentra el archivo, PHP genera un WARNING, pero el script
- *   CONTINÚA ejecutándose. La página se muestra incompleta (sin el pie).
- *
- * - require: si no encuentra el archivo, PHP genera un FATAL ERROR y el script
- *   SE DETIENE de inmediato. No se muestra nada de lo que sigue.
- *
- * Por eso se usa require para archivos indispensables (configuración y
- * encabezado, que definen las constantes y el HTML base) e include para
- * partes que no impiden que la página funcione (el pie).
+ * Diferencia comprobada entre include y require:
+ * al cambiar temporalmente el nombre de un archivo cargado con include,
+ * PHP muestra una advertencia y continúa ejecutando el resto del script.
+ * Si el archivo se carga con require y no existe, PHP detiene la ejecución
+ * porque lo considera indispensable para continuar.
  */
-require "config/configuracion.php";
-require "includes/encabezado.php";
+require 'config/configuracion.php';
+require 'includes/encabezado.php';
 ?>
 <main>
-    <h2>Bienvenido a <?= NOMBRE_EMPRESA ?></h2>
-    <p>Somos una empresa dedicada a la venta de equipos de tecnología.</p>
-    <p>Los precios de nuestros productos incluyen un ITBMS del <?= ITBMS * 100 ?>%.</p>
+    <section class="tarjeta">
+        <h1>Soluciones tecnológicas sin complicaciones</h1>
+        <p><?= NOMBRE_EMPRESA ?> ofrece accesorios y equipos para estudio, trabajo y uso cotidiano.</p>
+
+        <div class="destacado">
+            <strong>Información tributaria</strong>
+            <p>Los cálculos del catálogo utilizan un ITBMS de <?= number_format(ITBMS * 100, 0) ?>% definido desde el archivo de configuración.</p>
+        </div>
+
+        <p>El encabezado, la navegación y el pie de página se reutilizan mediante archivos independientes, evitando repetir la misma estructura HTML en cada página.</p>
+    </section>
 </main>
-<?php include "includes/pie.php"; ?>
+<?php include 'includes/pie.php'; ?>
